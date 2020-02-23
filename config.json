@@ -29,7 +29,6 @@
 			}
 	],
 	"parameters":[
-			"time",
 			"summary",
 			"icon",
 			"precipIntensity",
