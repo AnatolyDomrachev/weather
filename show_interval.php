@@ -51,7 +51,7 @@ foreach($config->parameters as $column)
 
 while ($row = $result->fetch_assoc()) {
 	echo "<tr>";
-        printf ("<td>%s \n", $row['time']);
+        printf ("<td>%s \n", gmdate("Y.m.d H:i:s", $row["time"]));
 	foreach($config->parameters as $column)
 		printf ("<td>%s \n", $row[$column]);
     }

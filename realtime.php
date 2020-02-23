@@ -1,6 +1,16 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+  <head>
+  <meta charset="utf-8">
+  </head>
+  <body>
+
 <?php
 
 $config = json_decode(file_get_contents('config.json'));
+print_r($config); 
+die();
+
 $table = $config->mysql->table;
 $tmp = $config->mysql->table."_tmp";
 
@@ -14,10 +24,6 @@ $mysqli = new mysqli($host, $user, $password, $database);
 if ($mysqli->connect_errno) {
     echo "Не удалось подключиться к MySQL: (" . $mysqli->connect_errno . ") " . $mysqli->connect_error;
 }
-
-$query = "delete from ".$tmp;
-if ( !$mysqli->query($query) ) 
-    echo "Не удалось выполнить запрос (" . $mysqli->errno . ") " . $mysqli->error;
 
 foreach($config->cities as $city)
 {
@@ -46,12 +52,7 @@ foreach($config->cities as $city)
 	}
 }
 
-$query = "delete from ".$table." where time in select time from ".$tmp;
-if ( !$mysqli->query($query) ) 
-    echo "Не удалось выполнить запрос (" . $mysqli->errno . ") " . $mysqli->error;
-
-$query = "insert into ".$table."(".$columns.") select (".$columns.") from ".$tmp;
-if ( !$mysqli->query($query) ) 
-    echo "Не удалось выполнить запрос (" . $mysqli->errno . ") " . $mysqli->error;
 
 ?>
+
+

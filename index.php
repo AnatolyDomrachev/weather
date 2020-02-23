@@ -5,6 +5,8 @@
   </head>
   <body>
 
+<h3>Выбор из интервала</h3>
+<p>
 <form action = show_interval.php method = GET>
 
 <?php
@@ -37,7 +39,7 @@ if ( !$result)
 
 <?php
  while ($row = $result->fetch_assoc()) {
-        printf ("<option value = %s> %s </option> \n", $row["time"], gmdate("Y-m-d H:i:s", $row["time"]));
+        printf ("<option value = %s> %s </option> \n", $row["time"], gmdate("Y.m.d H:i:s", $row["time"]));
     }
 
     $result->free();
@@ -69,5 +71,8 @@ if ( !$result)
 <p>
 <input type = submit>
 </form>
+<p>
+<a href = realtime.php> <h3>Прогноз в реальном времени</h3> </a>
+
 </body>
 </html>
