@@ -23,31 +23,42 @@ if ($mysqli->connect_errno) {
 }
 ?>
 
-
-<?php foreach($config->cities as $city): ?>
-<?php echo "<h3>".$city->name."</h3>"; ?>
-<table border = 1>
-<tr>
-<td>Time
-<?php foreach($config->parameters as $column): ?>
-
-<?php echo "<td>".$column."</td>"; ?>
-
-<?php endforeach; ?>
-
-</table>
-
-<?php endforeach; ?>
-
 <?php
 $t1 = $_GET['t1'];
 $t2 = $_GET['t2'];
+?>
 
-$query = "select * from ".$table." where time >= ".$t1." and time <= ".$t2;
+<?php foreach($config->cities as $city): ?>
+
+<?php
+
+$query = "select * from ".$table." where time >= ".$t1." and time <= ".$t2." and city_id = ".$city->id;
 $result = $mysqli->query($query) ;
 if ( !$result) 
     echo "Не удалось выполнить запрос (" . $mysqli->errno . ") " . $mysqli->error;
 
+?>
+
+
+<?php echo "<h3>".$city->name."</h3>"; ?>
+<table border = 1>
+<tr>
+<td>Time
+<?php 
+
+foreach($config->parameters as $column)
+	echo "<td>".$column."</td>"; 
+
+while ($row = $result->fetch_assoc()) {
+	echo "<tr>";
+        printf ("<td>%s \n", $row['time']);
+	foreach($config->parameters as $column)
+		printf ("<td>%s \n", $row[$column]);
+    }
 
 ?>
+
+</table>
+
+<?php endforeach; ?>
 

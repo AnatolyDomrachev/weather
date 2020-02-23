@@ -36,7 +36,7 @@ foreach($config->cities as $city)
 			$query .= " , ".$column;
 
 		$query .= " ) VALUES (";
-		$query .= $config->cities[0]->id.", ". $data['time'];
+		$query .= $city->id.", ". $data['time'];
 
 		foreach($config->parameters as $column)
 			$query .= ' , "'.$data[$column].'"';
@@ -46,6 +46,8 @@ foreach($config->cities as $city)
 		if ( !$mysqli->query($query) ) {
 		    echo "Не удалось выполнить запрос (" . $mysqli->errno . ") " . $mysqli->error;
 		}
+	}
+}
 		$query = "insert into ".$table." select * from ".$tmp;
 
 		if ( !$mysqli->query($query) ) {
@@ -55,7 +57,5 @@ foreach($config->cities as $city)
 		echo"\n\n\n";
 		echo $query;
 		echo"\n\n\n";
-	}
-}
 
 ?>
