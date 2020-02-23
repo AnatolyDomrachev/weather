@@ -15,34 +15,21 @@ if ($mysqli->connect_errno) {
 else
     echo "Удалось подключиться к MySQL \n" ;
 
-$table .= "( id INT AUTO_INCREMENT PRIMARY KEY, ";
-$table .= "city_id INT";
-$table .= ", time INT";
+foreach((array)$config->mysql->tables as $table)
+{
+	$create = "( id INT AUTO_INCREMENT PRIMARY KEY, ";
+	$create .= "city_id int, time int, ".implode(" varchar(50),", $config->parameters);
+	$create .= " varchar(50))";
+	$create = 'CREATE TABLE IF NOT EXISTS '. $table . $create;
 
-foreach($config->parameters as $column)
-	$table .= " , ".$column." varchar(50)";
+		echo"\n\n\n";
+		echo $create;
+		echo"\n\n\n";
 
-$table_1 = 'CREATE TABLE IF NOT EXISTS ' . $config->mysql->table.$table.")";
-$table_tmp = 'CREATE TABLE IF NOT EXISTS ' . $config->mysql->table."_tmp".$table.")";
-
-$table .= ")";
-
-	echo"\n\n\n";
-	echo $table_1;
-	echo"\n\n\n";
-	echo $table_tmp;
-	echo"\n\n\n";
-
-if ( !$mysqli->query($table_1) ) {
-    echo "Не удалось создать таблицу: (" . $mysqli->errno . ") " . $mysqli->error;
-}
-else
-    echo "Удалось создать таблицу\n" ;
-
-if ( !$mysqli->query($table_tmp) ) {
-    echo "Не удалось создать таблицу: (" . $mysqli->errno . ") " . $mysqli->error;
-}
-else
-    echo "Удалось создать таблицу\n" ;
- 
+	if ( !$mysqli->query($create) ) {
+	    echo "Не удалось создать таблицу: (" . $mysqli->errno . ") " . $mysqli->error;
+	}
+	else
+	    echo "Удалось создать таблицу\n" ;
+}	 
 ?>

@@ -8,9 +8,7 @@
 <?php
 
 $config = json_decode(file_get_contents('config.json'));
-$table = $config->mysql->table;
-$tmp = $config->mysql->table."_tmp";
-
+$table = $config->mysql->tables->main;
 $host = $config->mysql->host;
 $user = $config->mysql->user;
 $password = $config->mysql->passwd;

@@ -12,9 +12,7 @@
 <?php
 
 $config = json_decode(file_get_contents('config.json'));
-$table = $config->mysql->table;
-$tmp = $config->mysql->table."_tmp";
-
+$table = $config->mysql->tables->main;
 $host = $config->mysql->host;
 $user = $config->mysql->user;
 $password = $config->mysql->passwd;
@@ -29,7 +27,7 @@ if ($mysqli->connect_errno) {
 $query = "select time from ".$table;
 $result = $mysqli->query($query) ;
 if ( !$result) 
-    echo "Не удалось выполнить запрос (" . $mysqli->errno . ") " . $mysqli->error;
+    echo "Не удалось выполнить запрос 1 (" . $mysqli->errno . ") " . $mysqli->error;
 
 ?>
 
@@ -51,7 +49,7 @@ if ( !$result)
 <?php
 $result = $mysqli->query($query) ;
 if ( !$result) 
-    echo "Не удалось выполнить запрос (" . $mysqli->errno . ") " . $mysqli->error;
+    echo "Не удалось выполнить запрос 2 (" . $mysqli->errno . ") " . $mysqli->error;
 
 ?>
 
