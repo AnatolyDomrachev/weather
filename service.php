@@ -46,12 +46,16 @@ foreach($config->cities as $city)
 		if ( !$mysqli->query($query) ) {
 		    echo "Не удалось выполнить запрос (" . $mysqli->errno . ") " . $mysqli->error;
 		}
+		$query = "insert into ".$table." select * from ".$tmp;
+
+		if ( !$mysqli->query($query) ) {
+		    echo "Не удалось выполнить запрос (" . $mysqli->errno . ") " . $mysqli->error;
+		}
+
 		echo"\n\n\n";
 		echo $query;
 		echo"\n\n\n";
 	}
-
-
 }
 
 ?>
