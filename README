@@ -1,0 +1,18 @@
+ИНСТРУКЦИЯ
+
+1. УСТАНОВКА
+
+	1.1 Создание базы данных
+
+		mysql> create database weather;
+		mysql> GRANT ALL PRIVILEGES ON weather.* TO 'weather'@'localhost' IDENTIFIED BY '12345';
+
+	1.2 Создание таблиц
+
+		Находясь в папке проекта запускаем
+		php install.php 
+
+2. ЗАПУСК СЕРВИСА
+
+	Находясь в папке проекта запускаем
+	php service.php 
